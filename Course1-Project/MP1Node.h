@@ -31,6 +31,7 @@
 enum MsgTypes{
     JOINREQ,
     JOINREP,
+	HEARTBEAT,
     DUMMYLASTMSGTYPE
 };
 
@@ -41,6 +42,9 @@ enum MsgTypes{
  */
 typedef struct MessageHdr {
 	enum MsgTypes msgType;
+	Address * source;
+	long heartbeat;
+	vector<MemberListEntry> * memberList;
 }MessageHdr;
 
 /**
@@ -76,6 +80,11 @@ public:
 	void initMemberListTable(Member *memberNode);
 	void printAddress(Address *addr);
 	virtual ~MP1Node();
+
+	// New added methods
+	MemberListEntry parseRequest(MessageHdr * msg);
+	void updateMemberList(vector<MemberListEntry> *commingList);
+	Address * buildAddr(int id, short port);
 };
 
 #endif /* _MP1NODE_H_ */

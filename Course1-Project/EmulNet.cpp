@@ -89,10 +89,11 @@ int EmulNet::ENsend(Address *myaddr, Address *toaddr, char *data, int size) {
 	static char temp[2048];
 	int sendmsg = rand() % 100;
 
-	if( (emulnet.currbuffsize >= ENBUFFSIZE) || (size + (int)sizeof(en_msg) >= par->MAX_MSG_SIZE) || (par->dropmsg && sendmsg < (int) (par->MSG_DROP_PROB * 100)) ) {
+	if((emulnet.currbuffsize >= ENBUFFSIZE) || (size + (int)sizeof(en_msg) >= par->MAX_MSG_SIZE) || (par->dropmsg && sendmsg < (int) (par->MSG_DROP_PROB * 100)) ) {
 		return 0;
 	}
 
+	// initializing the em_msg
 	em = (en_msg *)malloc(sizeof(en_msg) + size);
 	em->size = size;
 
@@ -100,6 +101,7 @@ int EmulNet::ENsend(Address *myaddr, Address *toaddr, char *data, int size) {
 	memcpy(&(em->to.addr), &(toaddr->addr), sizeof(em->from.addr));
 	memcpy(em + 1, data, size);
 
+	// add em to the buffer of the network
 	emulnet.buff[emulnet.currbuffsize++] = em;
 
 	int src = *(int *)(myaddr->addr);

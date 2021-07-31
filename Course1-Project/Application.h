@@ -24,7 +24,7 @@ int nodeCount = 0;
  * Macros
  */
 #define ARGS_COUNT 2
-#define TOTAL_RUNNING_TIME 700
+#define TOTAL_RUNNING_TIME 20
 
 /**
  * CLASS NAME: Application
@@ -35,7 +35,7 @@ class Application{
 private:
 	// Address for introduction to the group
 	// Coordinator Node
-	char JOINADDR[30];
+	char JOINADDR[100];
 	EmulNet *en;
     Log *log;
 	MP1Node **mp1;

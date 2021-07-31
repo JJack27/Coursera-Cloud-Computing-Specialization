@@ -48,9 +48,9 @@ void Log::LOG(Address *addr, const char * str, ...) {
 	va_list vararglist;
 	static char buffer[30000];
 	static int numwrites;
-	static char stdstring[30];
-	static char stdstring2[40];
-	static char stdstring3[40]; 
+	static char stdstring[100];
+	static char stdstring2[100];
+	static char stdstring3[100]; 
 	static int dbg_opened=0;
 
 	if(dbg_opened != 639){
@@ -91,12 +91,12 @@ void Log::LOG(Address *addr, const char * str, ...) {
 		fprintf(fp2, "\n %s", stdstring);
 		fprintf(fp2, "[%d] ", par->getcurrtime());
 
-		fprintf(fp2, buffer);
+		fprintf(fp2, "%s", buffer);
 	}
 	else{
 		fprintf(fp, "\n %s", stdstring);
 		fprintf(fp, "[%d] ", par->getcurrtime());
-		fprintf(fp, buffer);
+		fprintf(fp, "%s", buffer);
 
 	}
 
@@ -125,7 +125,7 @@ void Log::logNodeAdd(Address *thisNode, Address *addedAddr) {
  * DESCRIPTION: To log a node remove
  */
 void Log::logNodeRemove(Address *thisNode, Address *removedAddr) {
-	static char stdstring[30];
+	static char stdstring[300];
 	sprintf(stdstring, "Node %d.%d.%d.%d:%d removed at time %d", removedAddr->addr[0], removedAddr->addr[1], removedAddr->addr[2], removedAddr->addr[3], *(short *)&removedAddr->addr[4], par->getcurrtime());
     LOG(thisNode, stdstring);
 }

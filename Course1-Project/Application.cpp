@@ -154,9 +154,9 @@ void Application::mp1Run() {
 			// handle messages and send heartbeats
 			mp1[i]->nodeLoop();
 			#ifdef DEBUGLOG
-			if( (i == 0) && (par->globaltime % 500 == 0) ) {
-				log->LOG(&mp1[i]->getMemberNode()->addr, "@@time=%d", par->getcurrtime());
-			}
+				if( (i == 0) && (par->globaltime % 500 == 0) ) {
+					log->LOG(&mp1[i]->getMemberNode()->addr, "@@time=%d", par->getcurrtime());
+				}
 			#endif
 		}
 
